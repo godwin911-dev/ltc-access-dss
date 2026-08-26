@@ -4,7 +4,7 @@
 
 Author: **Edoseawe Godwin Okoduwa**, MHSA, CPH
 PhD Candidate, Public & Community Health, Medical College of Wisconsin
-[ORCID](https://orcid.org/) · [Google Scholar](https://scholar.google.com/)
+[ORCID](https://orcid.org/0009-0009-8678-3176) · [Google Scholar](https://scholar.google.com/citations?user=DV4mqtYAAAAJ&hl=en)
 
 ---
 
