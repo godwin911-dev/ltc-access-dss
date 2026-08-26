@@ -11,7 +11,7 @@
 :root{
   --blue:#1a3a5c;--blue2:#2563a8;--lblue:#dbeafe;--dk:#1a1a1a;--gray:#6b7280;
   --bg:#f0f4f8;--wh:#fff;--bd:#e2e8f0;--sf:#f8fafc;--r:8px;
-  --sh:0 1px 3px rgba(0,0,0.12);--shm:0 4px 12px rgba(0,0,0.1);
+  --sh:0 1px 3px rgba(0,0,0,.12);--shm:0 4px 12px rgba(0,0,0,.1);
   --cr:#dc2626;--hi:#ea580c;--mo:#ca8a04;--lo:#16a34a;
   --cr-bg:#fef2f2;--hi-bg:#fff7ed;--mo-bg:#fefce8;--lo-bg:#f0fdf4;
 }
@@ -20,11 +20,11 @@ body{font-family:"Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(
 .hdr{background:var(--blue);color:#fff;padding:0 18px;display:flex;align-items:center;gap:12px;height:52px;box-shadow:var(--shm);flex-shrink:0}
 .ht{font-size:14px;font-weight:700}.hs{font-size:10px;opacity:.68;margin-top:1px}
 .hr{margin-left:auto;display:flex;gap:7px;align-items:center}
-.hb{background:rgba(255,255,255.15);border:none;color:#fff;border-radius:5px;padding:4px 10px;font-size:11px;font-weight:600;cursor:pointer;transition:.15s}
-.hb:hover{background:rgba(255,255,255.26)}
-.nav{background:var(--blue);border-bottom:1px solid rgba(255,255,255.12);display:flex;gap:1px;padding:0 18px;flex-shrink:0;overflow-x:auto}
-.tab{padding:8px 12px;color:rgba(255,255,255.68);cursor:pointer;font-size:12px;font-weight:500;border-bottom:2px solid transparent;transition:.15s;white-space:nowrap;flex-shrink:0}
-.tab:hover{color:#fff;background:rgba(255,255,255.08)}
+.hb{background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:5px;padding:4px 10px;font-size:11px;font-weight:600;cursor:pointer;transition:.15s}
+.hb:hover{background:rgba(255,255,255,.26)}
+.nav{background:var(--blue);border-bottom:1px solid rgba(255,255,255,.12);display:flex;gap:1px;padding:0 18px;flex-shrink:0;overflow-x:auto}
+.tab{padding:8px 12px;color:rgba(255,255,255,.68);cursor:pointer;font-size:12px;font-weight:500;border-bottom:2px solid transparent;transition:.15s;white-space:nowrap;flex-shrink:0}
+.tab:hover{color:#fff;background:rgba(255,255,255,.08)}
 .tab.active{color:#fff;border-bottom-color:#60a5fa;font-weight:700}
 .ml{display:flex;flex:1;overflow:hidden}
 .sb{width:248px;background:var(--wh);border-right:1px solid var(--bd);padding:12px 13px;overflow-y:auto;flex-shrink:0}
@@ -46,11 +46,11 @@ select:focus,input:focus{border-color:var(--blue2)}
 .trr:last-child{border-bottom:none}
 .trd{width:10px;height:10px;border-radius:2px;flex-shrink:0}
 .trn{margin-left:auto;font-weight:700}
-.mtt{position:absolute;z-index:500;background:rgba(15,23,42.93);color:#fff;border-radius:8px;padding:9px 13px;font-size:12px;pointer-events:none;display:none;max-width:235px;line-height:1.6;box-shadow:0 4px 20px rgba(0,0,0.3)}
+.mtt{position:absolute;z-index:500;background:rgba(15,23,42,.93);color:#fff;border-radius:8px;padding:9px 13px;font-size:12px;pointer-events:none;display:none;max-width:235px;line-height:1.6;box-shadow:0 4px 20px rgba(0,0,0,.3)}
 .mtt strong{font-size:12.5px;display:block;margin-bottom:3px;color:#60a5fa}
 .mr{display:flex;justify-content:space-between;gap:10px}
-.ml2{color:rgba(255,255,255.62)}.mv{font-weight:700}
-.yro{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);z-index:400;background:rgba(255,255,255.96);border:1px solid var(--bd);border-radius:10px;padding:8px 13px;box-shadow:var(--shm);display:flex;align-items:center;gap:10px;min-width:380px}
+.ml2{color:rgba(255,255,255,.62)}.mv{font-weight:700}
+.yro{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);z-index:400;background:rgba(255,255,255,.96);border:1px solid var(--bd);border-radius:10px;padding:8px 13px;box-shadow:var(--shm);display:flex;align-items:center;gap:10px;min-width:380px}
 .yrn{font-size:19px;font-weight:700;color:var(--blue);min-width:42px;text-align:center}
 .yrs{font-size:9px;color:var(--gray);text-align:center;margin-top:1px}
 input[type=range]{flex:1;accent-color:var(--blue);height:5px;cursor:pointer}
@@ -98,12 +98,12 @@ tr:hover td{background:var(--sf)}
 .fw-w{flex:1;height:7px;background:#e2e8f0;border-radius:3px;overflow:hidden}
 .fw-b{height:100%;border-radius:3px}
 .fw-p{font-size:11px;color:var(--gray);min-width:28px;text-align:right}
-.ml3{position:absolute;inset:0;background:rgba(255,255,255.88);z-index:1000;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:9px}
+.ml3{position:absolute;inset:0;background:rgba(255,255,255,.88);z-index:1000;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:9px}
 .sp{width:32px;height:32px;border:3px solid var(--lblue);border-top-color:var(--blue);border-radius:50%;animation:sp .8s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
-.mov{display:none;position:fixed;inset:0;background:rgba(0,0,0.42);z-index:2000;align-items:center;justify-content:center}
+.mov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:2000;align-items:center;justify-content:center}
 .mov.open{display:flex}
-.mdl{background:#fff;border-radius:12px;padding:20px;width:340px;box-shadow:0 20px 60px rgba(0,0,0.22)}
+.mdl{background:#fff;border-radius:12px;padding:20px;width:340px;box-shadow:0 20px 60px rgba(0,0,0,.22)}
 .mdl h3{font-size:13px;font-weight:700;color:var(--blue);margin-bottom:10px}
 .mdl label{font-size:11px;font-weight:600;color:var(--gray);display:block;margin-bottom:3px;margin-top:8px}
 .mdl input{width:100%;border:1px solid var(--bd);border-radius:6px;padding:6px 8px;font-size:12.5px}
@@ -120,7 +120,7 @@ tr:hover td{background:var(--sf)}
 .sc-btn.opt.active{background:var(--lo);color:#fff;border-color:var(--lo)}
 .sc-btn.pes{border-color:var(--cr);color:var(--cr)}
 .sc-btn.pes.active{background:var(--cr);color:#fff;border-color:var(--cr)}
-@media(max-width:700px){.sb{display:none}.g2.g3.mc3{grid-template-columns:1fr}.yro{min-width:90vw}}
+@media(max-width:700px){.sb{display:none}.g2,.g3,.mc3{grid-template-columns:1fr}.yro{min-width:90vw}}
 </style>
 </head>
 <body>
@@ -172,10 +172,11 @@ tr:hover td{background:var(--sf)}
     </div>
     <div class="sbs">
       <div class="sbl">Select Metric:</div>
+      <div class="sbn">Projected Score applies the selected scenario to the year on the slider. Move the slider or press Play to step through 2025 to 2035.</div>
       <select id="metric-sel" onchange="onMetric()">
         <option value="score">Demand Score (LDI-T)</option>
         <option value="tier">Risk Tier</option>
-        <option value="proj">2035 Projected Score</option>
+        <option value="proj">Projected Score (by year)</option>
       </select>
     </div>
     <div class="sbs">
@@ -198,7 +199,7 @@ tr:hover td{background:var(--sf)}
     <div class="sbs"><div class="sbl">Feature Weights</div><div id="sb-fw" style="font-size:11px"></div></div>
   </div>
   <div class="ma" style="position:relative">
-    <div id="mapbanner" style="position:absolute;top:10px;left:50%;transform:translateX(-50%);z-index:600;background:rgba(26,58,92.94);color:#fff;padding:5px 14px;border-radius:16px;font:11.5px/1.3 system-ui,-apple-system,sans-serif;box-shadow:0 2px 8px rgba(0,0,0.25);white-space:nowrap;pointer-events:none"></div>
+    <div id="mapbanner" style="position:absolute;top:10px;left:50%;transform:translateX(-50%);z-index:600;background:rgba(26,58,92,.94);color:#fff;padding:5px 14px;border-radius:16px;font:11.5px/1.3 system-ui,-apple-system,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.25);white-space:nowrap;pointer-events:none"></div>
     <div id="ml3" class="ml3"><div class="sp"></div><span style="font-size:12.5px;color:var(--blue);font-weight:600">Loading Wisconsin tract map...</span></div>
     <div id="lmap"></div>
     <div class="mtt" id="mtt"></div>
@@ -463,7 +464,7 @@ function applyM(){
 
 // ── NAV ──────────────────────────────────────────────────────────────────
 function showT(id,el){
-  document.querySelectorAll('.ml.cnt').forEach(e=>{e.style.display='none';e.classList.remove('active');});
+  document.querySelectorAll('.ml,.cnt').forEach(e=>{e.style.display='none';e.classList.remove('active');});
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   el.classList.add('active'); updSvLbls();
   if(id==='map'){document.getElementById('tab-map').style.display='flex';if(!mapReady)initMap();}
@@ -492,7 +493,7 @@ function getMapColor(geoid,yr=null){
   if(!sl)return '#cccccc';
   const t=TR.find(x=>x.GEOID===geoid);
   const y=(yr!==null&&yr!==undefined)?yr:curYr();
-  if(curMetric==='proj'){return t?tC(projScore(t,2035),curSvc):'#cccccc';}
+  if(curMetric==='proj'){return t?tC(projScore(t,Math.max(y,2026)),curSvc):'#cccccc';}
   const v=t?projScore(t,y):sl[curSvc];
   if(curMetric==='tier')return TIER_C[tierOf(v,curSvc)]||'#cccccc';
   return tC(v,curSvc);
@@ -523,15 +524,20 @@ function renderMapLayer(){
     }
   }).addTo(lmap);
   updSidebar();
+  syncYearCtl();
   updBanner();
 }
 function updBanner(){
   const el=document.getElementById('mapbanner'); if(!el)return;
-  const mlab={score:'Demand Score',tier:'Risk Tier',proj:'2035 Projected Score'}[curMetric]||curMetric;
+  const mlab={score:'Demand Score',tier:'Risk Tier',proj:'Projected Score'}[curMetric]||curMetric;
   const y=curYr();
-  const yrTxt=(curMetric==='proj')?'2035':y;
-  const scTxt=((curMetric==='proj')||y>2025)?' &middot; '+curMapSc+' scenario':'';
-  el.innerHTML='Showing <strong>'+curSvc+'</strong> &middot; '+mlab+' &middot; <strong>'+yrTxt+'</strong>'+scTxt;
+  const yrTxt=y;
+  const scTxt=(y>2025)?' &middot; '+curMapSc+' scenario':'';
+  let nC=0;
+  try{const yy=y;
+    nC=TR.filter(t=>projScore(t,yy)>=D.tier_thresholds[curSvc].q75).length;}catch(e){}
+  el.innerHTML='Showing <strong>'+curSvc+'</strong> &middot; '+mlab+' &middot; <strong>'+yrTxt+'</strong>'+scTxt+
+    ' &middot; <strong>'+nC+'</strong> Critical tracts';
 }
 function updSidebar(){updSidebarFor(curYr());}
 function updSidebarFor(y){
@@ -610,7 +616,17 @@ function goLoc(){
   if(addr)fetch('https://nominatim.openstreetmap.org/search?format=json&q='+encodeURIComponent(addr+', Wisconsin'))
     .then(r=>r.json()).then(d=>{if(d&&d.length>0)lmap.setView([parseFloat(d[0].lat),parseFloat(d[0].lon)],12);}).catch(()=>{});}
 function onSvc(){curSvc=document.getElementById('svc-sel').value;updSvLbls();if(mapReady){recolour();updBanner();}}
-function onMetric(){curMetric=document.getElementById('metric-sel').value;if(mapReady){recolour();updBanner();}}
+function onMetric(){curMetric=document.getElementById('metric-sel').value;
+  syncYearCtl();
+  if(mapReady){recolour();updBanner();}}
+function syncYearCtl(){
+  const sl=document.getElementById('yr-sl'), pb=document.getElementById('pb-map');
+  const box=document.getElementById('yro');
+  if(sl)sl.disabled=false;
+  if(pb){pb.disabled=false;pb.style.opacity='1';pb.style.cursor='pointer';}
+  if(box){box.style.opacity='1';box.title='';}
+}
+
 const SCEN_RATIO={"Baseline": 1.0, "Optimistic": 0.892, "Pessimistic": 1.0625};
 function scenFactor(){return SCEN_RATIO[curMapSc]!==undefined?SCEN_RATIO[curMapSc]:1;}
 // projected score for a tract at a given year under the active scenario
@@ -853,7 +869,7 @@ function renderWarning(){
   dc('ch-cumcrit');
   new Chart(document.getElementById('ch-cumcrit'),{type:'line',
     data:{labels:YEARS,datasets:[
-      {label:'Baseline',data:YEARS.map(y=>Math.max(0,D.yearly_critical[curSvc]['Baseline'][String(y)]-base)),borderColor:'#1a3a5c',backgroundColor:'rgba(26,58,92.08)',tension:.3,fill:true,pointRadius:3},
+      {label:'Baseline',data:YEARS.map(y=>Math.max(0,D.yearly_critical[curSvc]['Baseline'][String(y)]-base)),borderColor:'#1a3a5c',backgroundColor:'rgba(26,58,92,.08)',tension:.3,fill:true,pointRadius:3},
       {label:'Pessimistic',data:YEARS.map(y=>Math.max(0,D.yearly_critical[curSvc]['Pessimistic'][String(y)]-base)),borderColor:'#dc2626',backgroundColor:'transparent',tension:.3,borderDash:[4,2],pointRadius:2},
       {label:'Optimistic',data:YEARS.map(y=>Math.max(0,D.yearly_critical[curSvc]['Optimistic'][String(y)]-base)),borderColor:'#16a34a',backgroundColor:'transparent',tension:.3,borderDash:[6,3],pointRadius:2},
     ]},
