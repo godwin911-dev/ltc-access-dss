@@ -101,22 +101,29 @@ python3 -m http.server 8000
 
 ```
 ltc-dss/
-├── index.html                  interactive decision-support interface
+├── index.html              interactive decision-support interface
+├── README.md               this file
+├── SETUP.md                reproducing the pipeline from scratch
+├── LICENSE                 MIT
 ├── R/
 │   ├── 01_fetch_real_data.R    federal data acquisition (Census, CMS, CDC)
 │   └── 02_model.R              LDI-T construction, ensemble, forecasting
+├── docs/
+│   ├── HOW_IT_WORKS.md         plain-language explanation of the method
+│   ├── METHODOLOGY.md          index construction, model spec, validation
+│   ├── DATA_SOURCES.md         full provenance and known limitations
+│   └── DEVELOPMENT_LOG.md      how the system was built, what remains
 ├── data/
 │   ├── wi_tracts.geojson       real tract boundaries        [generated]
 │   ├── tract_features.rds      real feature table           [generated]
 │   └── dss_payload.json        interface data payload       [generated]
-├── docs/
-│   ├── METHODOLOGY.md          index construction, model spec, validation
-│   └── DATA_SOURCES.md         full provenance and known limitations
 └── outputs/
     └── ltc_results.xlsx        8-sheet analyst workbook     [generated]
 ```
 
-Generated artifacts are not committed; run the two scripts to reproduce them.
+Generated artifacts are not committed. Run the two scripts in `R/` to reproduce
+them. Note that `index.html` is self-contained and does not require them; the
+generated files let you verify or extend the pipeline.
 
 ---
 
