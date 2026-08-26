@@ -34,14 +34,14 @@ which are keyed on GEOID rather than geometry.
 | | |
 |---|---|
 | Source | U.S. Census Bureau, ACS 5-Year Estimates |
-| Vintage | 2018–2022 (release year 2022) |
+| Vintage | 2018 to 2022 (release year 2022) |
 | Access | `tidycensus::get_acs(geography = "tract", survey = "acs5")` |
 
 | Variable | ACS Table | Derivation |
 |---|---|---|
 | Total population | B01003_001 | direct |
 | Population 65+ | B01001_020:025, B01001_044:049 | summed across sex-by-age cells |
-| % Age 65+ | — | `100 × pop_65plus / pop_total` |
+| % Age 65+ |, | `100 × pop_65plus / pop_total` |
 | Median household income | B19013_001 | direct, expressed in $1,000s |
 | % Below poverty | B17001_002 / B17001_001 | ratio |
 | % 65+ living alone | B09021_022 / B09021_001 | ratio |
@@ -51,7 +51,7 @@ which are keyed on GEOID rather than geometry.
 **Limitations.** ACS 5-year estimates are survey-based and carry margins of error that
 widen in low-population tracts. Margins of error are retrieved but not currently
 propagated through the index; this is a known limitation and a planned enhancement.
-The 5-year window means values represent a pooled 2018–2022 period, not a single year.
+The 5-year window means values represent a pooled 2018 to 2022 period, not a single year.
 
 ### 1.3 CMS nursing facility supply
 
@@ -65,7 +65,7 @@ The 5-year window means values represent a pooled 2018–2022 period, not a sing
 Certified bed counts are aggregated to county and expressed as **beds per 1,000
 residents aged 65+**, then joined to tracts within each county.
 
-**Limitation — significant.** This is a county-level supply measure distributed to
+**Limitation, significant.** This is a county-level supply measure distributed to
 tracts, not a tract-level measure. It cannot distinguish a tract adjacent to a facility
 from one at the far edge of the same county. True point-location catchment modelling
 using Enhanced Two-Step Floating Catchment Area (E2SFCA) with road-network travel times
@@ -98,7 +98,7 @@ assumption below is sourced; none are invented.
 
 | Parameter | Baseline | Optimistic | Pessimistic | Basis |
 |---|---|---|---|---|
-| Nursing facility beds, change to 2035 | −12% | +5% | −18% | CMS facility closure rates 2020–2024 |
+| Nursing facility beds, change to 2035 | −12% | +5% | −18% | CMS facility closure rates 2020 to 2024 |
 | Direct-care workforce deficit | +20% | +8% | +30% | PHI direct-care workforce projections |
 | Home health coverage | −7% | +2% | −12% | CMS rural HHA contraction |
 | Disability prevalence, 65+ | +8% | +4% | +12% | BRFSS age-adjusted trend |

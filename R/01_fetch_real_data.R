@@ -1,6 +1,6 @@
 # =============================================================================
 #
-#  STEP 01 — ACQUIRE REAL FEDERAL DATA
+#  STEP 01, ACQUIRE REAL FEDERAL DATA
 #  Long-Term Care Access Decision-Support System
 #
 #  Author      : Edoseawe Godwin Okoduwa, MHSA, CPH
@@ -21,7 +21,7 @@
 #    CMS                 Provider of Services      via data.cms.gov  (public CSV)
 #    CDC                 PLACES tract estimates    via data.cdc.gov  (Socrata)
 #
-#  PREREQUISITE — Census API key (free, issued instantly):
+#  PREREQUISITE, Census API key (free, issued instantly):
 #    https://api.census.gov/data/key_signup.html
 #    Then run once:  tidycensus::census_api_key("YOUR_KEY", install = TRUE)
 #
@@ -49,7 +49,7 @@ OUT_DIR   <- "data"
 dir.create(OUT_DIR, showWarnings = FALSE, recursive = TRUE)
 
 cat("=================================================================\n")
-cat(" STEP 01 — ACQUIRING REAL FEDERAL DATA\n")
+cat(" STEP 01, ACQUIRING REAL FEDERAL DATA\n")
 cat(" States:", paste(STATES, collapse = ", "), "| ACS year:", ACS_YEAR, "\n")
 cat("=================================================================\n\n")
 
@@ -111,7 +111,7 @@ acs_age <- map_dfr(STATES, function(st) {
           survey = "acs5", geometry = FALSE, progress_bar = FALSE)
 }) |>
   group_by(GEOID) |>
-  summarise(pop_65plus = sum(estimate, na.rm = TRUE), .groups = "drop")
+  summarise(pop_65plus = sum(estimate, na.rm = TRUE).groups = "drop")
 
 acs_dis <- map_dfr(STATES, function(st) {
   get_acs(geography = "tract", state = st, year = ACS_YEAR,
@@ -177,18 +177,18 @@ read_cms <- function(path) {
            beds_      = suppressWarnings(as.numeric(beds_))) |>
     group_by(county_key) |>
     summarise(county_beds  = sum(beds_, na.rm = TRUE),
-              n_facilities = n(), .groups = "drop")
+              n_facilities = n().groups = "drop")
 }
 
 cms_beds <- if (file.exists(local_cms)) {
-  cat("      Found local NH_ProviderInfo.csv — using it.\n")
+  cat("      Found local NH_ProviderInfo.csv, using it.\n")
   tryCatch(read_cms(local_cms),
            error = function(e) {
              cat("      ERROR reading local file:", conditionMessage(e), "\n")
              tibble(county_key=character(), county_beds=numeric(), n_facilities=integer())
            })
 } else {
-  cat("      No local file found — attempting download...\n")
+  cat("      No local file found, attempting download...\n")
   tryCatch({
     raw <- readr::read_csv(cms_url, show_col_types = FALSE, progress = FALSE)
     readr::write_csv(raw, local_cms)
@@ -271,12 +271,12 @@ qc <- features |>
                    ~ round(100 * mean(is.na(.x)), 1))) |>
   pivot_longer(everything(), names_to = "variable", values_to = "pct_missing")
 
-cat("\n      DATA QUALITY — percent missing by variable:\n")
+cat("\n      DATA QUALITY, percent missing by variable:\n")
 print(as.data.frame(qc), row.names = FALSE)
 
 stopifnot(nrow(features) > 0)
 if (mean(is.na(features$pct_65)) > 0.10) {
-  warning("More than 10% of tracts missing pct_65 — inspect ACS retrieval.")
+  warning("More than 10% of tracts missing pct_65, inspect ACS retrieval.")
 }
 
 # ---- write simplified geometry for the web DSS -------------------------------
@@ -298,6 +298,6 @@ cat(sprintf("\n      WROTE  %s  (%.1f MB, %s real tracts)\n",
 cat(sprintf("      WROTE  %s\n", file.path(OUT_DIR, "tract_features.rds")))
 
 cat("\n=================================================================\n")
-cat(" STEP 01 COMPLETE — all geometry and features are real federal data\n")
+cat(" STEP 01 COMPLETE, all geometry and features are real federal data\n")
 cat(" Next:  source(\"R/02_model.R\")\n")
 cat("=================================================================\n")

@@ -10,8 +10,8 @@ PhD Candidate, Public & Community Health, Medical College of Wisconsin
 
 ## What this is
 
-Federal long-term care (LTC) planning instruments — HPSA designations, MUA/P, and CMS
-facility databases — are **category-specific, retrospective, and reported at macro
+Federal long-term care (LTC) planning instruments, HPSA designations, MUA/P, and CMS
+facility databases, are **category-specific, retrospective, and reported at macro
 geographies**. None of them model whether an older adult in a *specific neighborhood*
 can actually reach appropriate care, and none forecast where access will fail next.
 
@@ -20,7 +20,7 @@ This repository implements a decision-support system that addresses those three 
 | Gap in existing federal tools | What this system does |
 |---|---|
 | No LTC-specific shortage designation | Constructs an LTC Demand Index (LDI-T) plus service-type sub-indices for nursing facilities, home health, and adult day services |
-| Retrospective only | Forecasts tract-level demand annually 2025–2035 under three documented scenarios |
+| Retrospective only | Forecasts tract-level demand annually 2025 to 2035 under three documented scenarios |
 | Macro-geography (county/state) | Operates at **census-tract** resolution across all tracts in the study area |
 | Models supply, not access | Weights supply against demand, workforce deficit, isolation, disability, and poverty barriers |
 
@@ -29,7 +29,7 @@ departments, county aging offices, ADRCs, and provider networks.
 
 ---
 
-## Data basis — please read
+## Data basis, please read
 
 This distinction is maintained rigorously throughout the codebase, the interface, and
 the documentation.
@@ -47,11 +47,11 @@ the documentation.
 | Nursing facility beds | CMS Care Compare / Provider of Services |
 | Chronic disease prevalence | CDC PLACES (tract-level model-based estimates) |
 
-**Projected data.** All 2025–2035 values are **scenario projections**, not measurements.
+**Projected data.** All 2025 to 2035 values are **scenario projections**, not measurements.
 They are produced by applying documented federal trend assumptions (SSA demographic
 projections, CMS facility closure rates, PHI direct-care workforce projections, BRFSS
-disability trends) to observed 2022 baselines. Three scenarios — Baseline, Optimistic,
-Pessimistic — are reported so that outputs remain actionable under uncertainty rather
+disability trends) to observed 2022 baselines. Three scenarios, Baseline, Optimistic,
+Pessimistic, are reported so that outputs remain actionable under uncertainty rather
 than anchored to a single point estimate.
 
 Note that CDC PLACES values are themselves small-area model-based estimates, not direct
@@ -172,9 +172,41 @@ Washington D.C.).
 
 ---
 
+---
+
+## What is in this repository
+
+| Path | Contents |
+|---|---|
+| `index.html` | The decision-support interface. Self-contained; open it directly in a browser. |
+| `R/01_fetch_real_data.R` | Retrieves tract boundaries and features from Census, CMS and CDC. |
+| `R/02_model.R` | Builds the demand index, trains the ensemble, generates forecasts. |
+| `docs/HOW_IT_WORKS.md` | Plain-language explanation of the method and what it found. |
+| `docs/METHODOLOGY.md` | Index construction, model specification, validation status. |
+| `docs/DATA_SOURCES.md` | Full data provenance, vintages and known limitations. |
+| `docs/DEVELOPMENT_LOG.md` | How the system was built and what remains outstanding. |
+| `SETUP.md` | Reproducing the pipeline from scratch. |
+| `LICENSE` | MIT. |
+
+Nothing in this repository requires a licensed dataset, a paid API or
+institutional access. A free Census API key is the only credential needed to
+reproduce the pipeline.
+
+## Reusing this work
+
+The methodology is state-agnostic. The pipeline is parameterised by state FIPS
+code, and every input is a federal dataset published for all 50 states on the
+same schema. Applying it to another state is a configuration change, not a
+redesign.
+
+If you adapt this for your jurisdiction, please read `docs/DATA_SOURCES.md`
+first. It documents the limitations that constrain how the outputs should be
+interpreted, particularly around forecast uncertainty and the absence of
+external validation.
+
 ## License
 
-MIT — see [`LICENSE`](LICENSE). Released openly so that state, local, tribal, and
+MIT, see [`LICENSE`](LICENSE). Released openly so that state, local, tribal, and
 territorial health departments can adapt the methodology to their own jurisdictions.
 
 ## Citation

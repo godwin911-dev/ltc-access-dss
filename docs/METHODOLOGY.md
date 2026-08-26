@@ -10,9 +10,8 @@ mental health, and dental health. There is no equivalent shortage designation fo
 long-term care, despite LTC being among the fastest-growing categories of need.
 
 **Temporal orientation.** HPSA and MUA/P designations are retrospective. They identify
-where shortage exists now. Long-term care infrastructure — constructing a facility,
-recruiting and training a direct-care workforce, expanding an HCBS waiver program —
-operates on multi-year lead times. A designation that appears only after shortage has
+where shortage exists now. Long-term care infrastructure, constructing a facility,
+recruiting and training a direct-care workforce, expanding an HCBS waiver program, operates on multi-year lead times. A designation that appears only after shortage has
 materialised arrives after the intervention window has closed.
 
 **Access versus supply.** Existing instruments largely model provider-to-population
@@ -30,7 +29,7 @@ barriers rather than supply counts alone.
 
 ### 2.1 Components
 
-Eight components, each min-max normalised to 0–100 across the study area. Higher values
+Eight components, each min-max normalised to 0 to 100 across the study area. Higher values
 consistently indicate greater unmet demand pressure.
 
 | Component | Symbol | Derivation | Direction |
@@ -94,8 +93,8 @@ projection years:
 | Tier | Threshold |
 |---|---|
 | Critical | ≥ 75th percentile |
-| High | 50th–75th |
-| Moderate | 25th–50th |
+| High | 50th to 75th |
+| Moderate | 25th to 50th |
 | Low | < 25th percentile |
 
 Fixing thresholds at baseline is deliberate. If thresholds were recomputed each year,
@@ -110,7 +109,7 @@ whole distribution shifts. Fixed thresholds make tier escalation across years me
 
 | | |
 |---|---|
-| Target | LDI-T (continuous, 0–100) |
+| Target | LDI-T (continuous, 0 to 100) |
 | Features | 10 tract-level predictors |
 | Split | 80 / 20 train-test, stratified on LDI-T |
 | Resampling | 5-fold cross-validation, stratified |
@@ -165,6 +164,18 @@ pct_dis[t] = min(100, pct_dis · (1 + β_dis[s] · f))
 The fitted ensemble is then applied to the adjusted feature matrix. Scenario parameters
 β are documented in [`DATA_SOURCES.md`](DATA_SOURCES.md) §2.
 
+**Scope limitation, service-specific forecasts.** The ensemble currently forecasts the composite
+LDI-T only. Service-type trajectories displayed in the interface (Nursing Facility, Home Health, Adult
+Day Services) are proportional approximations scaled from the Overall trajectory, not independent model
+runs. Producing genuine service-specific forecasts requires re-running the ensemble against each
+sub-index with its own trend-adjusted feature vector; this is implemented in the roadmap but not yet
+in the deployed system. Service-type curves should be read as indicative only.
+
+**On scenario spread.** The three scenarios diverge modestly because the dominant index component, age structure, 0.45 combined weight, follows the same SSA projection across all scenarios. Only
+supply, workforce and disability trends vary. This is deliberate: demographic momentum through 2035 is
+already largely determined by the current population, so presenting wide demographic divergence would
+overstate genuine uncertainty on that component.
+
 **Early warning.** A tract is flagged as escalating when it is currently below the
 Critical threshold but is projected to cross it by 2035. This is the operationally
 actionable output: it identifies where intervention has lead time to work.
@@ -175,12 +186,14 @@ actionable output: it identifies where intervention has lead time to work.
 
 | Check | Status |
 |---|---|
-| Held-out test set performance | Implemented — reported in interface and workbook |
+| Held-out test set performance | Implemented, reported in interface and workbook |
 | 5-fold cross-validation | Implemented |
 | Feature importance (permutation) | Implemented |
-| Scenario sensitivity | Implemented — three scenarios |
+| Scenario sensitivity | Implemented, three scenarios |
 | Index weight sensitivity analysis | **Planned** |
 | External validation vs. utilisation outcomes | **Planned** |
+| Service-specific forecast trajectories | **Not yet implemented** |
+| Independent per-service model fitting | **Planned**, service sub-indices are currently scaled from the overall projection |
 | Comparison against HPSA / MUA-P designations | **Planned** |
 
 The planned items are stated as planned. A tool intended for public health planning
@@ -190,9 +203,10 @@ should be explicit about which of its claims have been tested and which have not
 
 ## 6. Roadmap
 
-1. Integrate E2SFCA road-network catchment modelling from the Wisconsin statewide study,
+1. Implement genuine service-specific forecast trajectories (currently approximated from the composite).
+2. Integrate E2SFCA road-network catchment modelling from the Wisconsin statewide study,
    replacing the county-resolved bed-supply measure with true tract-level accessibility.
-2. Extend to Minnesota, Illinois, and Iowa; then to a national framework.
+3. Extend to Minnesota, Illinois, and Iowa; then to a national framework.
 3. Propagate ACS margins of error into index uncertainty bands.
 4. Link NHATS or MDS data for direct ADL measurement.
 5. External validation against observed utilisation and unmet-need outcomes.

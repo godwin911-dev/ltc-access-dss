@@ -1,6 +1,6 @@
 # =============================================================================
 #
-#  STEP 02 — LTC DEMAND FORECASTING & ACCESS MODELLING
+#  STEP 02, LTC DEMAND FORECASTING & ACCESS MODELLING
 #  Stacked ensemble (Random Forest + Gradient Boosting), census-tract level
 #
 #  Author      : Edoseawe Godwin Okoduwa, MHSA, CPH
@@ -21,7 +21,7 @@
 #    A stacked ensemble is trained to predict LDI-T from the feature set, then
 #    applied to trend-adjusted feature vectors to forecast 2025-2035.
 #
-#  IMPORTANT — WHAT IS OBSERVED vs. WHAT IS PROJECTED
+#  IMPORTANT, WHAT IS OBSERVED vs. WHAT IS PROJECTED
 #    Observed  : all 2022 feature values (ACS, CMS, CDC PLACES)
 #    Projected : 2025-2035 values, obtained by applying documented federal
 #                trend assumptions to observed 2022 baselines. Projections are
@@ -37,7 +37,7 @@ suppressPackageStartupMessages({
 set.seed(2024)
 
 cat("=================================================================\n")
-cat(" STEP 02 — FORECASTING DEMAND & MODELLING ACCESS TO LTC\n")
+cat(" STEP 02, FORECASTING DEMAND & MODELLING ACCESS TO LTC\n")
 cat(" Edoseawe Godwin Okoduwa | Medical College of Wisconsin\n")
 cat("=================================================================\n\n")
 
@@ -56,11 +56,11 @@ df <- df |>
   group_by(county) |>
   mutate(across(c(pct_65, income_k, pct_pov, pct_aln, pct_dis,
                   pct_adl, cdi, nh_beds),
-                ~ if_else(is.na(.x), median(.x, na.rm = TRUE), .x))) |>
+                ~ if_else(is.na(.x), median(.x, na.rm = TRUE).x))) |>
   ungroup() |>
   mutate(across(c(pct_65, income_k, pct_pov, pct_aln, pct_dis,
                   pct_adl, cdi, nh_beds),
-                ~ if_else(is.na(.x), median(.x, na.rm = TRUE), .x)))
+                ~ if_else(is.na(.x), median(.x, na.rm = TRUE).x)))
 
 # SSA / Census projected 65+ share growth to 2035, applied to observed baseline
 SSA_GROWTH_2035 <- 0.33
@@ -99,10 +99,10 @@ df <- df |> mutate(
               0.15*c_wf + 0.10*c_age
 )
 
-Q_ov  <- quantile(df$LDI_T,    c(.25,.50,.75))
-Q_nf  <- quantile(df$NF_score, c(.25,.50,.75))
-Q_hha <- quantile(df$HHA_score,c(.25,.50,.75))
-Q_ads <- quantile(df$ADS_score,c(.25,.50,.75))
+Q_ov  <- quantile(df$LDI_T,    c(.25.50.75))
+Q_nf  <- quantile(df$NF_score, c(.25.50.75))
+Q_hha <- quantile(df$HHA_score,c(.25.50.75))
+Q_ads <- quantile(df$ADS_score,c(.25.50.75))
 
 tier_fixed <- function(x, q) {
   factor(case_when(x >= q[3] ~ "Critical", x >= q[2] ~ "High",
@@ -236,6 +236,23 @@ cat(sprintf("        Escalating to Critical by 2035 (baseline): %d tracts (%.1f%
             n_esc, 100 * n_esc / nrow(df)))
 
 
+
+# =============================================================================
+# KNOWN ISSUE, PAYLOAD EXPORT SCHEMA (STEP 5)
+#
+# The dss_payload.json written below does NOT contain every key the web
+# interface requires. Missing: score_lookup, tier_lookup, feature_weights,
+# yearly_means, yearly_critical, disparity, tier_thresholds, county_service.
+#
+# The deployed index.html has a corrected, complete payload embedded directly,
+# so the dashboard works as shipped. But re-running this script will produce an
+# incomplete payload. Fix the export schema before extending to MN / IL / IA.
+#
+# Note also: tier_thresholds must be exported as named objects
+# {q25:, q50:, q75:}, not arrays, and disparity groups must be dict-keyed
+# with mean / n / n_crit fields.
+# =============================================================================
+
 # -----------------------------------------------------------------------------
 # STEP 5: EXPORT DSS PAYLOAD (consumed by index.html)
 # -----------------------------------------------------------------------------
@@ -280,7 +297,7 @@ payload <- list(
     summarise(n_tracts = n(), mean_ldi = round(mean(LDI_T),2),
               mean_2035 = round(mean(LDI_T_2035),2),
               n_critical = sum(risk_tier == "Critical"),
-              n_escalating = sum(tier_esc_ov, na.rm = TRUE), .groups = "drop") |>
+              n_escalating = sum(tier_esc_ov, na.rm = TRUE).groups = "drop") |>
     arrange(desc(mean_ldi))
 )
 
@@ -336,7 +353,7 @@ saveWorkbook(wb, "outputs/ltc_results.xlsx", overwrite = TRUE)
 cat("        WROTE outputs/ltc_results.xlsx\n")
 
 cat("\n=================================================================\n")
-cat(sprintf(" COMPLETE — %s real tracts | %d counties | Ensemble R2 = %.4f\n",
+cat(sprintf(" COMPLETE, %s real tracts | %d counties | Ensemble R2 = %.4f\n",
             format(nrow(df), big.mark = ","), n_distinct(df$county), results$R2[3]))
 cat(" Next:  open index.html (serve locally, do not double-click)\n")
 cat("        python3 -m http.server 8000\n")

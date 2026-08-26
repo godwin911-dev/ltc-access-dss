@@ -1,8 +1,8 @@
-# Setup — from zero to a live public URL
+# Setup, from zero to a live public URL
 
 ## 1. Get a Census API key (2 minutes, free)
 
-https://api.census.gov/data/key_signup.html — arrives by email instantly.
+https://api.census.gov/data/key_signup.html, arrives by email instantly.
 
 ```r
 install.packages("tidycensus")
@@ -33,7 +33,7 @@ source("R/02_model.R")             # 2-5 min
 ```
 
 Script 01 prints a data-quality table. If any variable shows high percent missing,
-stop and investigate before proceeding — do not model over silent gaps.
+stop and investigate before proceeding, do not model over silent gaps.
 
 ## 4. View locally
 
@@ -58,7 +58,7 @@ git remote add origin https://github.com/USERNAME/ltc-dss.git
 git push -u origin main
 ```
 
-Create the empty repo at github.com/new first — **do not** initialise it with a README,
+Create the empty repo at github.com/new first, **do not** initialise it with a README,
 or the push will be rejected for unrelated histories.
 
 ### Enable GitHub Pages
@@ -70,7 +70,7 @@ Live at `https://USERNAME.github.io/ltc-dss` in about a minute.
 ### Important: generated data is gitignored
 
 `.gitignore` excludes `data/*.geojson` and `data/*.json`, so a fresh clone has code but
-no data — good practice, but **GitHub Pages will show an empty map**.
+no data, good practice, but **GitHub Pages will show an empty map**.
 
 To publish a working live demo, force-add the two files the interface needs:
 
