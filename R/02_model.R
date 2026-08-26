@@ -56,11 +56,11 @@ df <- df |>
   group_by(county) |>
   mutate(across(c(pct_65, income_k, pct_pov, pct_aln, pct_dis,
                   pct_adl, cdi, nh_beds),
-                ~ if_else(is.na(.x), median(.x, na.rm = TRUE).x))) |>
+                ~ if_else(is.na(.x), median(.x, na.rm = TRUE), .x))) |>
   ungroup() |>
   mutate(across(c(pct_65, income_k, pct_pov, pct_aln, pct_dis,
                   pct_adl, cdi, nh_beds),
-                ~ if_else(is.na(.x), median(.x, na.rm = TRUE).x)))
+                ~ if_else(is.na(.x), median(.x, na.rm = TRUE), .x)))
 
 # SSA / Census projected 65+ share growth to 2035, applied to observed baseline
 SSA_GROWTH_2035 <- 0.33
@@ -99,10 +99,10 @@ df <- df |> mutate(
               0.15*c_wf + 0.10*c_age
 )
 
-Q_ov  <- quantile(df$LDI_T,    c(.25.50.75))
-Q_nf  <- quantile(df$NF_score, c(.25.50.75))
-Q_hha <- quantile(df$HHA_score,c(.25.50.75))
-Q_ads <- quantile(df$ADS_score,c(.25.50.75))
+Q_ov  <- quantile(df$LDI_T,    c(.25, .50, .75))
+Q_nf  <- quantile(df$NF_score, c(.25, .50, .75))
+Q_hha <- quantile(df$HHA_score,c(.25, .50, .75))
+Q_ads <- quantile(df$ADS_score,c(.25, .50, .75))
 
 tier_fixed <- function(x, q) {
   factor(case_when(x >= q[3] ~ "Critical", x >= q[2] ~ "High",
@@ -190,9 +190,22 @@ cat("\n        Held-out test performance:\n"); print(results); cat("\n")
 # -----------------------------------------------------------------------------
 cat("STEP 4: Generating scenario forecasts 2025-2035...\n")
 
+# Scenario trend assumptions, applied to observed 2022 baselines.
+#
+#   Baseline     continuation of documented recent trends
+#   Optimistic   sustained policy success: facility expansion reversing the
+#                closure trend, wage investment reducing direct-care turnover,
+#                HCBS waiver expansion, and age-adjusted disability prevalence
+#                held flat rather than rising
+#   Pessimistic  acceleration of current trends
+#
+# The 65+ population share follows the same SSA projection in all three
+# scenarios. Demographic momentum through 2035 is determined by the population
+# already alive and is not a policy variable, so scenarios vary supply,
+# workforce and disability only.
 SCEN <- list(
   Baseline    = c(beds=-0.12, cdi= 0.20, hha=-0.07, dis= 0.08),
-  Optimistic  = c(beds= 0.05, cdi= 0.08, hha= 0.02, dis= 0.04),
+  Optimistic  = c(beds= 0.12, cdi=-0.05, hha= 0.10, dis= 0.00),
   Pessimistic = c(beds=-0.18, cdi= 0.30, hha=-0.12, dis= 0.12)
 )
 YEARS   <- 2025:2035
@@ -297,7 +310,7 @@ payload <- list(
     summarise(n_tracts = n(), mean_ldi = round(mean(LDI_T),2),
               mean_2035 = round(mean(LDI_T_2035),2),
               n_critical = sum(risk_tier == "Critical"),
-              n_escalating = sum(tier_esc_ov, na.rm = TRUE).groups = "drop") |>
+              n_escalating = sum(tier_esc_ov, na.rm = TRUE), .groups = "drop") |>
     arrange(desc(mean_ldi))
 )
 

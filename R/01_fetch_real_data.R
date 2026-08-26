@@ -111,7 +111,7 @@ acs_age <- map_dfr(STATES, function(st) {
           survey = "acs5", geometry = FALSE, progress_bar = FALSE)
 }) |>
   group_by(GEOID) |>
-  summarise(pop_65plus = sum(estimate, na.rm = TRUE).groups = "drop")
+  summarise(pop_65plus = sum(estimate, na.rm = TRUE), .groups = "drop")
 
 acs_dis <- map_dfr(STATES, function(st) {
   get_acs(geography = "tract", state = st, year = ACS_YEAR,
@@ -177,7 +177,7 @@ read_cms <- function(path) {
            beds_      = suppressWarnings(as.numeric(beds_))) |>
     group_by(county_key) |>
     summarise(county_beds  = sum(beds_, na.rm = TRUE),
-              n_facilities = n().groups = "drop")
+              n_facilities = n(), .groups = "drop")
 }
 
 cms_beds <- if (file.exists(local_cms)) {
