@@ -58,8 +58,7 @@ access literature and by the Wisconsin statewide disparities analysis. The logic
   greatest reliability.
 - Supply-side gaps (bed gap, HHA gap) receive 0.25 combined, reflecting that supply
   constrains access but does not by itself determine need.
-- Workforce deficit receives 0.12 as the binding constraint on service delivery capacity
-  independent of physical infrastructure.
+- Care need intensity receives 0.12 as an indicator of population-level care burden associated with chronic disease prevalence.
 - Disability, isolation, and ADL limitation receive 0.18 combined as need-intensity
   modifiers.
 
