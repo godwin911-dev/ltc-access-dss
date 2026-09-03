@@ -132,7 +132,7 @@ generated files let you verify or extend the pipeline.
 **LDI-T** is a weighted composite of eight min-max normalised components:
 
 ```
-LDI_T = 0.25·age + 0.20·projected_age + 0.15·bed_gap + 0.12·workforce_deficit
+LDI_T = 0.25·age + 0.20·projected_age + 0.15·bed_gap + 0.12·care_need_intensity
       + 0.10·hha_gap + 0.08·disability + 0.06·isolation + 0.04·adl_limitation
 ```
 
