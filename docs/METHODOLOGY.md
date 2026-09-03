@@ -37,7 +37,7 @@ consistently indicate greater unmet demand pressure.
 | Current elderly share | `c_age` | normalise(% age 65+) | higher = more demand |
 | Projected elderly share | `c_proj` | normalise(projected % 65+ 2035) | higher = more demand |
 | Nursing facility bed gap | `c_bed` | 100 − normalise(beds per 1k 65+) | inverted: fewer beds = higher gap |
-| Caregiver workforce deficit | `c_wf` | normalise(chronic disease index) | higher = more care need per capita |
+| Care need intensity | `c_wf` | normalise(chronic disease index) | higher = more care need per capita |
 | Home health coverage gap | `c_hha` | 100 − normalise(HHA coverage) | inverted |
 | Disability prevalence | `c_dis` | normalise(% disability 65+) | higher = more demand |
 | Social isolation | `c_aln` | normalise(% 65+ living alone) | higher = less informal care |
