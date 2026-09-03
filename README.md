@@ -22,7 +22,7 @@ This repository implements a decision-support system that addresses those three 
 | No LTC-specific shortage designation | Constructs an LTC Demand Index (LDI-T) plus service-type sub-indices for nursing facilities, home health, and adult day services |
 | Retrospective only | Forecasts tract-level demand annually 2025 to 2035 under three documented scenarios |
 | Macro-geography (county/state) | Operates at **census-tract** resolution across all tracts in the study area |
-| Models supply, not access | Weights supply against demand, workforce deficit, isolation, disability, and poverty barriers |
+| Models supply, not access | Weights supply against demand, care need intensity, isolation, disability, and poverty barriers |
 
 Output is an interactive web decision-support interface intended for state health
 departments, county aging offices, ADRCs, and provider networks.
